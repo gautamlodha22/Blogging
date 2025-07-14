@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blogify Navbar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <nav class="bg-black shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <!-- App Name -->
+        <div class="flex-shrink-0 text-2xl font-bold text-blue-500">
+          Blogify
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="hidden md:flex space-x-4">
+          <a href="/" class="text-gray-100 hover:text-blue-500 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+          <% if(locals.user){ %>
+            <a href="/blog/add-new" class="text-gray-100 hover:text-blue-500 px-3 py-2 rounded-md text-sm font-medium">Add Blog</a>
+          <% } %>
+        </div>
+
+        <!-- Dropdown -->
+        <div class="relative inline-block text-left">
+          <button onclick="toggleDropdown()" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+            <% if(locals.user) { %>
+              Hii
+            <% }else{ %>
+              New User
+            <% } %>
+            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <div id="dropdownMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+            <div class="py-2">
+              <% if(locals.user){ %>
+                <div class="px-4 py-2 text-sm text-gray-600 font-semibold"></div>
+                <a href="/user/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+              <% }else{%>
+                <a href="/user/signup" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">create account</a>
+                <a href="/user/signin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">sign in</a>
+              <%}%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    function toggleDropdown() {
+      const menu = document.getElementById('dropdownMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Optional: close dropdown if clicked outside
+    window.addEventListener('click', function (e) {
+      const dropdown = document.getElementById('dropdownMenu');
+      const button = e.target.closest('button');
+      if (!e.target.closest('#dropdownMenu') && !button) {
+        dropdown.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

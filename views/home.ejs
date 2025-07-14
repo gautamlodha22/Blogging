@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <title>Document</title>
+</head>
+<body>
+  <%-include('./partials/navbar.ejs')%>
+  <!-- <%= JSON.stringify(blogs) %> -->
+  <div class="container flex p-5 flex-wrap gap-6" >
+    <% blogs.forEach(blog => { %>
+        <div class="max-w-sm bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+      <!-- Image -->
+      <img src="<%= blog.coverImageURL %>" alt="Cover Image" class="w-full h-48 object-cover">
+
+      <!-- Card Content -->
+      <div class="p-4">
+        <!-- Title -->
+        <h3 class="text-xl font-semibold text-gray-800 mb-2"><%= blog.title %></h3>
+
+        <!-- Paragraph -->
+        <p class="text-gray-600 text-sm mb-4">
+          This is a short summary of the blog post. It gives the reader a quick idea of what the blog is about.
+        </p>
+
+        <!-- Button -->
+        <a href="/blog/<%= blog._id %>" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
+          Read More
+        </a>
+      </div>
+    </div>
+  <% }) %>
+  </div>
+
+</body>
+</html>
