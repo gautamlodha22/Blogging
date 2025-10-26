@@ -8,7 +8,7 @@ const userRouter = require('./routes/user.js');
 const blogRouter = require('./routes/blog.js')
 const { checkForAuthentication } = require('./middlewares/authentication.js');
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8000 ;
 mongoose.connect(process.env.MONGO_URL).then(function(e){
     console.log("mongoDb is connected"); 
 })
